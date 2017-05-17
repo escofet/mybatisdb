@@ -1,5 +1,6 @@
 package com.itformacion;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -24,8 +25,14 @@ public class Application {
 		try {
 			List<Discount> discounts = session.selectList("com.itformacion.DiscountMapper.showDiscounts");
 			System.out.println(discounts);
+			Discount d = session.selectOne(
+				"com.itformacion.DiscountMapper.getDiscount", 
+				new Discount("L", new BigDecimal(7.0))
+			);
+			System.out.println(d);
 		} finally {
 			session.close();
 		}
 	}
 }
+
